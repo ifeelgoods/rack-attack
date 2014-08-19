@@ -9,10 +9,10 @@ module Rack
 
         # everything the same here except we return only return true
         # (blocking the request) if they have tripped the limit.
-        def fail!(discriminator, bantime, findtime, maxretry)
+        def fail!(discriminator, bantime, findtime, maxretry, track)
           count = cache.count("#{key_prefix}:count:#{discriminator}", findtime)
           if count >= maxretry
-            ban!(discriminator, bantime)
+            ban!(discriminator, bantime, track)
           end
           # we may not block them this time, but they're banned for next time
           false
