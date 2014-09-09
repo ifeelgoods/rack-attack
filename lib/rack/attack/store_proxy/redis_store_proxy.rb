@@ -19,7 +19,8 @@ module Rack
 
         def write(key, value, options={})
           if (expires_in = options[:expires_in])
-            self.setex(key, expires_in, value)
+            self.set(key, value)
+            self.expire(key, expires_in)
           else
             self.set(key, value)
           end
