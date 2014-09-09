@@ -22,7 +22,6 @@ module Rack
 
         def failed_attempts(discriminator, period)
           results = cache.count("#{key_prefix}:count:#{discriminator}", period)
-          puts results.inspect
           epoch_time = Time.now.to_i
           key = "#{(epoch_time/period).to_i}:#{key_prefix}:count:#{discriminator}"
           cache.read(key)
