@@ -29,6 +29,10 @@ module Rack
         store.write("#{prefix}:#{unprefixed_key}", value, :expires_in => expires_in)
       end
 
+      def ttl(unprefixed_key)
+        store.ttl("#{prefix}:#{unprefixed_key}")
+      end
+
       private
       def do_count(key, expires_in)
         result = store.increment(key, 1, :expires_in => expires_in)
